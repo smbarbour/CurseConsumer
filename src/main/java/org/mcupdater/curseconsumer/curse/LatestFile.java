@@ -10,6 +10,9 @@ public class LatestFile {
 	@SerializedName("id")
 	@Expose
 	private Long id;
+	@SerializedName("displayName")
+	@Expose
+	private String displayName;
 	@SerializedName("fileName")
 	@Expose
 	private String fileName;
@@ -19,6 +22,9 @@ public class LatestFile {
 	@SerializedName("fileDate")
 	@Expose
 	private String fileDate;
+	@SerializedName("fileLength")
+	@Expose
+	private Long fileLength;
 	@SerializedName("releaseType")
 	@Expose
 	private Long releaseType;
@@ -167,4 +173,19 @@ public class LatestFile {
 		return new ToStringBuilder(this).append("id", id).append("fileName", fileName).append("fileNameOnDisk", fileNameOnDisk).append("fileDate", fileDate).append("releaseType", releaseType).append("fileStatus", fileStatus).append("downloadUrl", downloadUrl).append("isAlternate", isAlternate).append("alternateFileId", alternateFileId).append("dependencies", dependencies).append("isAvailable", isAvailable).append("modules", modules).append("packageFingerprint", packageFingerprint).append("gameVersion", gameVersion).toString();
 	}
 
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public Long getFileLength() {
+		return fileLength;
+	}
+
+	public void setFileLength(Long fileLength) {
+		this.fileLength = fileLength;
+	}
 }

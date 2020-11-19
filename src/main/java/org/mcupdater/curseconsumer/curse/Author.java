@@ -12,6 +12,25 @@ public class Author {
 	@SerializedName("url")
 	@Expose
 	private String url;
+	@SerializedName("projectId")
+	@Expose
+	private Long projectId;
+	@SerializedName("id")
+	@Expose
+	private Long id;
+	@SerializedName("projectTitleId")
+	@Expose
+	private Long projectTitleId;
+	@SerializedName("projectTitleTitle")
+	@Expose
+	private String projectTitleTitle;
+	@SerializedName("userId")
+	@Expose
+	private Long userId;
+	@SerializedName("twitchId")
+	@Expose
+	private Long twitchId;
+
 
 	public String getName() {
 		return name;
@@ -34,4 +53,51 @@ public class Author {
 		return new ToStringBuilder(this).append("name", name).append("url", url).toString();
 	}
 
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getProjectTitleTitle() {
+		return projectTitleTitle;
+	}
+
+	public void setProjectTitleTitle(String projectTitleTitle) {
+		this.projectTitleTitle = projectTitleTitle;
+	}
+
+	public Long getProjectTitleId() {
+		return projectTitleId;
+	}
+
+	public void setProjectTitleId(Long projectTitleId) {
+		this.projectTitleId = projectTitleId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Long getTwitchId() {
+		return twitchId;
+	}
+
+	public void setTwitchId(Long twitchId) {
+		this.twitchId = twitchId;
+	}
 }

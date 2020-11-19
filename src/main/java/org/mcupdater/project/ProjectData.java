@@ -8,6 +8,7 @@ public class ProjectData {
 	private String modid;
 	private ArrayList<String> dependencies;
 	private ArrayList<Downloadable> downloadables;
+	private String modloader;
 	private String url;
 	private String author;
 	private Long curseId;
@@ -19,6 +20,7 @@ public class ProjectData {
 		dependencies = new ArrayList<>();
 		downloadables = new ArrayList<>();
 		authors = new ArrayList<>();
+		modloader = "Forge";
 	}
 
 	public String getModid() {
@@ -105,5 +107,13 @@ public class ProjectData {
 
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public String getModloader() {
+		return modloader;
+	}
+
+	public void setModloader(String modloader) {
+		this.modloader = modloader;
 	}
 }

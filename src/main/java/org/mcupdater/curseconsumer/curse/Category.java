@@ -6,22 +6,31 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Category {
 
-	@SerializedName("id")
+	@SerializedName("categoryId")
 	@Expose
-	private Long id;
+	private Long categoryId;
 	@SerializedName("name")
 	@Expose
 	private String name;
 	@SerializedName("url")
 	@Expose
 	private String url;
+	@SerializedName("avatarUrl")
+	@Expose
+	private String avatarUrl;
+	@SerializedName("parentId")
+	@Expose
+	private Long parentId;
+	@SerializedName("rootId")
+	@Expose
+	private Long rootId;
 
-	public Long getId() {
-		return id;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getName() {
@@ -42,7 +51,30 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("id", id).append("name", name).append("url", url).toString();
+		return new ToStringBuilder(this).append("id", categoryId).append("name", name).append("url", url).toString();
 	}
 
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
+	public Long getRootId() {
+		return rootId;
+	}
+
+	public void setRootId(Long rootId) {
+		this.rootId = rootId;
+	}
 }

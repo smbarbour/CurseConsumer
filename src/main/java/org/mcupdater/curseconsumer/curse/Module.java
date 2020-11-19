@@ -9,9 +9,13 @@ public class Module {
 	@SerializedName("folderName")
 	@Expose
 	private String folderName;
-	@SerializedName("fimgerprint")
+	@SerializedName("fingerprint")
 	@Expose
 	private Long fingerprint;
+	@SerializedName("type")
+	@Expose
+	private Long type;
+
 
 	public String getFolderName() {
 		return folderName;
@@ -34,4 +38,11 @@ public class Module {
 		return new ToStringBuilder(this).append("folderName", folderName).append("fingerprint", fingerprint).toString();
 	}
 
+	public Long getType() {
+		return type;
+	}
+
+	public void setType(Long type) {
+		this.type = type;
+	}
 }

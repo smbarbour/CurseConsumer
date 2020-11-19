@@ -27,6 +27,9 @@ public class CategorySection {
 	@SerializedName("extraIncludePattern")
 	@Expose
 	private Object extraIncludePattern;
+	@SerializedName("gameCategoryId")
+	@Expose
+	private Long gameCategoryId;
 
 	public Long getId() {
 		return id;
@@ -89,4 +92,11 @@ public class CategorySection {
 		return new ToStringBuilder(this).append("id", id).append("gameId", gameId).append("name", name).append("packageType", packageType).append("path", path).append("initialInclusionPattern", initialInclusionPattern).append("extraIncludePattern", extraIncludePattern).toString();
 	}
 
+	public Long getGameCategoryId() {
+		return gameCategoryId;
+	}
+
+	public void setGameCategoryId(Long gameCategoryId) {
+		this.gameCategoryId = gameCategoryId;
+	}
 }

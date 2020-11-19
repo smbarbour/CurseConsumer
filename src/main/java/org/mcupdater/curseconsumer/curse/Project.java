@@ -49,12 +49,6 @@ public class Project {
 	@SerializedName("categories")
 	@Expose
 	private List<Category> categories = null;
-	@SerializedName("primaryAuthorName")
-	@Expose
-	private String primaryAuthorName;
-	@SerializedName("externalUrl")
-	@Expose
-	private Object externalUrl;
 	@SerializedName("status")
 	@Expose
 	private Long status;
@@ -64,12 +58,9 @@ public class Project {
 	@SerializedName("donationUrl")
 	@Expose
 	private Object donationUrl;
-	@SerializedName("primaryCategoryName")
+	@SerializedName("primaryCategoryId")
 	@Expose
-	private String primaryCategoryName;
-	@SerializedName("primaryCategoryAvatarUrl")
-	@Expose
-	private String primaryCategoryAvatarUrl;
+	private Long primaryCategoryId;
 	@SerializedName("likes")
 	@Expose
 	private Long likes;
@@ -79,9 +70,6 @@ public class Project {
 	@SerializedName("packageType")
 	@Expose
 	private Long packageType;
-	@SerializedName("avatarUrl")
-	@Expose
-	private Object avatarUrl;
 	@SerializedName("slug")
 	@Expose
 	private String slug;
@@ -93,7 +81,7 @@ public class Project {
 	private List<GameVersionLatestFile> gameVersionLatestFiles = null;
 	@SerializedName("isFeatured")
 	@Expose
-	private Long isFeatured;
+	private Boolean isFeatured;
 	@SerializedName("popularityScore")
 	@Expose
 	private Double popularityScore;
@@ -240,22 +228,6 @@ public class Project {
 		this.categories = categories;
 	}
 
-	public String getPrimaryAuthorName() {
-		return primaryAuthorName;
-	}
-
-	public void setPrimaryAuthorName(String primaryAuthorName) {
-		this.primaryAuthorName = primaryAuthorName;
-	}
-
-	public Object getExternalUrl() {
-		return externalUrl;
-	}
-
-	public void setExternalUrl(Object externalUrl) {
-		this.externalUrl = externalUrl;
-	}
-
 	public Long getStatus() {
 		return status;
 	}
@@ -280,20 +252,12 @@ public class Project {
 		this.donationUrl = donationUrl;
 	}
 
-	public String getPrimaryCategoryName() {
-		return primaryCategoryName;
+	public Long getPrimaryCategoryId() {
+		return primaryCategoryId;
 	}
 
-	public void setPrimaryCategoryName(String primaryCategoryName) {
-		this.primaryCategoryName = primaryCategoryName;
-	}
-
-	public String getPrimaryCategoryAvatarUrl() {
-		return primaryCategoryAvatarUrl;
-	}
-
-	public void setPrimaryCategoryAvatarUrl(String primaryCategoryAvatarUrl) {
-		this.primaryCategoryAvatarUrl = primaryCategoryAvatarUrl;
+	public void setPrimaryCategoryId(Long primaryCategoryId) {
+		this.primaryCategoryId = primaryCategoryId;
 	}
 
 	public Long getLikes() {
@@ -320,14 +284,6 @@ public class Project {
 		this.packageType = packageType;
 	}
 
-	public Object getAvatarUrl() {
-		return avatarUrl;
-	}
-
-	public void setAvatarUrl(Object avatarUrl) {
-		this.avatarUrl = avatarUrl;
-	}
-
 	public String getSlug() {
 		return slug;
 	}
@@ -352,11 +308,11 @@ public class Project {
 		this.gameVersionLatestFiles = gameVersionLatestFiles;
 	}
 
-	public Long getIsFeatured() {
+	public Boolean getIsFeatured() {
 		return isFeatured;
 	}
 
-	public void setIsFeatured(Long isFeatured) {
+	public void setIsFeatured(Boolean isFeatured) {
 		this.isFeatured = isFeatured;
 	}
 
@@ -450,7 +406,7 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("id", id).append("name", name).append("authors", authors).append("attachments", attachments).append("websiteUrl", websiteUrl).append("gameId", gameId).append("summary", summary).append("defaultFileId", defaultFileId).append("commentCount", commentCount).append("downloadCount", downloadCount).append("rating", rating).append("installCount", installCount).append("latestFiles", latestFiles).append("categories", categories).append("primaryAuthorName", primaryAuthorName).append("externalUrl", externalUrl).append("status", status).append("stage", stage).append("donationUrl", donationUrl).append("primaryCategoryName", primaryCategoryName).append("primaryCategoryAvatarUrl", primaryCategoryAvatarUrl).append("likes", likes).append("categorySection", categorySection).append("packageType", packageType).append("avatarUrl", avatarUrl).append("slug", slug).append("clientUrl", clientUrl).append("gameVersionLatestFiles", gameVersionLatestFiles).append("isFeatured", isFeatured).append("popularityScore", popularityScore).append("gamePopularityRank", gamePopularityRank).append("fullDescription", fullDescription).append("gameName", gameName).append("portalName", portalName).append("sectionName", sectionName).append("dateModified", dateModified).append("dateCreated", dateCreated).append("dateReleased", dateReleased).append("isAvailable", isAvailable).append("categoryList", categoryList).toString();
+		return new ToStringBuilder(this).append("id", id).append("name", name).append("authors", authors).append("attachments", attachments).append("websiteUrl", websiteUrl).append("gameId", gameId).append("summary", summary).append("defaultFileId", defaultFileId).append("commentCount", commentCount).append("downloadCount", downloadCount).append("rating", rating).append("installCount", installCount).append("latestFiles", latestFiles).append("categories", categories).append("status", status).append("stage", stage).append("donationUrl", donationUrl).append("primaryCategoryId", primaryCategoryId).append("likes", likes).append("categorySection", categorySection).append("packageType", packageType).append("slug", slug).append("clientUrl", clientUrl).append("gameVersionLatestFiles", gameVersionLatestFiles).append("isFeatured", isFeatured).append("popularityScore", popularityScore).append("gamePopularityRank", gamePopularityRank).append("fullDescription", fullDescription).append("gameName", gameName).append("portalName", portalName).append("sectionName", sectionName).append("dateModified", dateModified).append("dateCreated", dateCreated).append("dateReleased", dateReleased).append("isAvailable", isAvailable).append("categoryList", categoryList).toString();
 	}
 
 }

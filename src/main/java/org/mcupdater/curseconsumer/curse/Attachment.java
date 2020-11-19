@@ -27,6 +27,10 @@ public class Attachment {
 	@SerializedName("url")
 	@Expose
 	private String url;
+	@SerializedName("status")
+	@Expose
+	private Integer status;
+
 
 	public Long getId() {
 		return id;
@@ -89,4 +93,11 @@ public class Attachment {
 		return new ToStringBuilder(this).append("id", id).append("projectID", projectID).append("description", description).append("isDefault", isDefault).append("thumbnailUrl", thumbnailUrl).append("title", title).append("url", url).toString();
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 }

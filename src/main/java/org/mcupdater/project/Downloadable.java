@@ -1,20 +1,22 @@
 package org.mcupdater.project;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Downloadable {
 	private String filename;
 	private String md5hash;
 	private long filesize;
 	private List<String> supportedVersions;
-	private List<String> urls;
+	private Set<String> urls;
 	private List<String> dependencies;
 	private long fileID;
 
 	public Downloadable() {
 		supportedVersions = new ArrayList<>();
-		urls = new ArrayList<>();
+		urls = new HashSet<>();
 		dependencies = new ArrayList<>();
 	}
 
@@ -50,11 +52,11 @@ public class Downloadable {
 		this.supportedVersions = supportedVersions;
 	}
 
-	public List<String> getUrls() {
+	public Set<String> getUrls() {
 		return urls;
 	}
 
-	public void setUrls(List<String> urls) {
+	public void setUrls(Set<String> urls) {
 		this.urls = urls;
 	}
 

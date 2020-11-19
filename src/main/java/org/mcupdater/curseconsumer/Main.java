@@ -23,6 +23,7 @@ public class Main {
 	public static void main(String[] args) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		try {
+			/*
 			Properties properties = new Properties();
 			File propFile = new File("CurseConsumer.properties");
 			if (propFile.exists()) {
@@ -35,28 +36,36 @@ public class Main {
 				System.exit(1);
 			}
 			Login login = new Login(properties.getProperty("username"),properties.getProperty("password"));
-			CloseableHttpClient client = HttpClientBuilder.create().build();
 			HttpPost post = new HttpPost("https://logins-v1.curseapp.net/login");
 			StringEntity stringEntity = new StringEntity(gson.toJson(login));
 			post.setEntity(stringEntity);
 			post.setHeader("Content-Type", "application/json");
 			HttpResponse response = client.execute(post);
 			AuthResponse auth = gson.fromJson(new InputStreamReader(response.getEntity().getContent(),"UTF8"), AuthResponse.class);
+			 */
+			CloseableHttpClient client = HttpClientBuilder.create().build();
 			List<Project> projects = new ArrayList<>();
 			int i = 0;
+			Random delayRandom = new Random();
 			while(true) {
-				HttpGet get = new HttpGet("https://addons-v2.forgesvc.net/api/addon/search?gameId=432&sectionId=6&index=" + i * 1000 + "&pageSize=1000");
-				get.setHeader("AuthenticationToken", auth.getSession().getToken());
+				HttpGet get = new HttpGet("https://addons-ecs.forgesvc.net/api/v2/addon/search?gameId=432&sort=Name&sectionId=6&gameVersion=1.16.2&index=" + i * 1000 + "&pageSize=1000");
 				HttpResponse getResponse = client.execute(get);
+				System.out.println(i + ": " + getResponse.getStatusLine().getStatusCode() + " - " + getResponse.getStatusLine().getReasonPhrase());
 				Project[] page = gson.fromJson(new InputStreamReader(getResponse.getEntity().getContent(), "UTF-8"), Project[].class);
-				for (int index = 0; index < page.length; index++) {
-					projects.add(page[index]);
-				}
-				System.out.println("Records returned: " + page.length);
-				if (page.length < 500) {
-					break;
+				if (page != null) {
+					for (int index = 0; index < page.length; index++) {
+						projects.add(page[index]);
+					}
+					System.out.println("Records returned: " + page.length);
+					if (page.length < 1000) {
+						break;
+					} else {
+						i++;
+						client.close();
+						client = HttpClientBuilder.create().build();
+					}
 				} else {
-					i++;
+					break;
 				}
 			}
 			System.out.println("Total projects: " + projects.size());
@@ -72,23 +81,29 @@ public class Main {
 				projectData.setTimestamp(time);
 				projectData.setCurseId(project.getId());
 				projectData.setSlug(project.getSlug());
+				if (project.getCategories().stream().anyMatch(c -> c.getName().equals("Fabric"))) {
+					projectData.setModloader("Fabric");
+				}
 				Map<Long, Downloadable> downloadables = new HashMap<>();
-				for (LatestFile file : project.getLatestFiles()) {
+				for (GameVersionLatestFile file : project.getGameVersionLatestFiles()) {
 					Downloadable downloadable;
-					if (downloadables.containsKey(file.getId())) {
-						downloadable = downloadables.get(file.getId());
+					if (downloadables.containsKey(file.getProjectFileId())) {
+						downloadable = downloadables.get(file.getProjectFileId());
 					} else {
 						downloadable = new Downloadable();
 					}
-					downloadable.setFileID(file.getId());
-					downloadable.setFilename(file.getFileName());
-					downloadable.getSupportedVersions().addAll(file.getGameVersion());
-					downloadables.put(file.getId(), downloadable);
+					downloadable.setFileID(file.getProjectFileId());
+					downloadable.setFilename(file.getProjectFileName());
+					downloadable.getSupportedVersions().add(file.getGameVersion());
+					long highPart = downloadable.getFileID() / 1000;
+					long lowPart = downloadable.getFileID() % 1000;
+					downloadable.getUrls().add("https://edge.forgecdn.net/files/" + highPart + "/" + lowPart + "/" + file.getProjectFileName());
+					downloadables.put(file.getProjectFileId(), downloadable);
 				}
 				projectData.setDownloadables(new ArrayList<>(downloadables.values()));
 				mods.add(projectData);
 			}
-			JsonWriter writer = new JsonWriter(new FileWriter("/home/smbarbour/output_source.json"));
+			JsonWriter writer = new JsonWriter(new FileWriter("/home/smbarbour/1.16.2.json"));
 			writer.setIndent("  ");
 			gson.toJson(mods.toArray(), ProjectData[].class,writer);
 
